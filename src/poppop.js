@@ -13,7 +13,8 @@ export default class PopPop extends Component {
   static defaultProps = {
     position: 'topCenter',
     closeOnOverlay: true,
-    overlayStyle: {}
+    overlayStyle: {},
+    wrapperStyle :{}
   };
 
   static propTypes = {
@@ -24,6 +25,7 @@ export default class PopPop extends Component {
     onClose: PropTypes.func,
     overlayStyle: PropTypes.object,
     contentStyle: PropTypes.object,
+    wrapperStyle: PropTypes.object,
     position: PropTypes.oneOf([
       'topLeft', 'topCenter', 'topRight',
       'centerLeft', 'centerCenter', 'centerRight',
@@ -62,12 +64,13 @@ export default class PopPop extends Component {
   }
 
   render() {
-    const {open, position, overlayStyle, contentStyle} = this.props;
+    const {open, position, overlayStyle, contentStyle, wrapperStyle} = this.props;
     const extractPosition = extractCamelCase(position);
     const mergeWrapperStyle = {
       ...styles.wrapper,
       ...styles.alignItems[extractPosition[0]],
-      ...styles.justifyContent[extractPosition[1]]
+      ...styles.justifyContent[extractPosition[1]],
+      ...wrapperStyle
     }
 
     const mergeOverlayStyle = {
